@@ -1,38 +1,35 @@
 #ifndef PROJECT1_LIBRARY_H
 #define PROJECT1_LIBRARY_H
 
-// Definindo a estrutura do lembrete
-typedef struct lembrete{
-    // Variável da prioridade
-    int prioridade;
-    // Variável da descrição
-    char descricao[300];
-    // Variável da categoria
-    char categoria[100];
+typedef struct lembrete {
+  int prioridade;
+  char descricao[300];
+  char categoria[100];
+  char estado[100];
+  int numero;
 } Lembrete;
 
-// Define a estrtura da lista com lembretes
-typedef struct{
-    // Quantidade de lembretes
-    Lembrete l[100];
-    // Variável da quantidade
-    int qtd;
+typedef struct {
+  Lembrete l[100];
+  int qtd;
 } ListaDeLembretes;
 
-// Função que adiciona lembretes
 int criarLembrete(ListaDeLembretes *ll);
-// Função que deleta lembretes
 int deletarLembrete(ListaDeLembretes *ll);
-// Função que lista os lembretes
 int listarLembrete(ListaDeLembretes ll);
 
-//  Função que imprime o menu
+void printMenualteracao();
+int alterarLembrete(ListaDeLembretes *ll);
+// int filtroprioridadeLembrete(ListaDeLembretes *ll);
+// int filtroestadoLembrete(ListaDeLembretes *ll);
+// int filtrocategoriaLembrete(ListaDeLembretes ll);
+// int filtroprioridadeecategoriaLembrete(ListaDeLembretes *ll);
+// int exportarprioridadeLembrete(ListaDeLembretes *ll);
+// int exportarcategoriaLembrete(ListaDeLembretes *ll);
+// int exportarprioridadeecategoriaLembrete(ListaDeLembretes *ll);
+
 void printMenu();
-// Função que salva a lista de lembretes no arquivo
 int salvarLista(ListaDeLembretes ll, char nome[]);
-// Função que carrega os lembretes do arquivo
 int carregarLista(ListaDeLembretes *ll, char nome[]);
 
-
-
-#endif //PROJECT1_LIBRARY_H
+#endif // PROJECT1_LIBRARY_H
