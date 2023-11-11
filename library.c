@@ -65,6 +65,70 @@ int listarLembrete(ListaDeLembretes ll) {
   return 0;
 }
 
+int alterarLembrete(ListaDeLembretes *ll) {
+  printf("\n-Opção Alterar Lembrete\n");
+  if (ll->qtd == 0) {
+    printf("\nNão existe nenhum lembrete, crie um\n");
+    return 0;
+  }
+  int numerodolembrete;
+  printf("\nNúmero do lembrete: ");
+  scanf("%d", &numerodolembrete);
+  int numlembrete = buscaLembrete(*ll, numerodolembrete);
+  if (numlembrete == -1) {
+    printf("\nEsse Lembrete não existe\n");
+    return 0;
+  }
+  printMenualteracao();
+  int opcao;
+  int c;
+  printf("Escolha a alteração desejada: ");
+  scanf("%d", &opcao);
+  switch (opcao) {
+  case 1:
+    printf("\nPrioridade: ");
+    scanf("%d", &ll->l[numlembrete].prioridade);
+    printf("\nPrioridade alterada\n");
+    break;
+  case 2:
+    printf("\nCategoria: ");
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+    fgets(ll->l[numlembrete].categoria, sizeof(ll->l[numlembrete].categoria),
+          stdin);
+    ll->l[numlembrete].categoria[strcspn(ll->l[numlembrete].categoria, "\n")] =
+        '\0';
+    printf("\nCategoria alterada\n");
+    break;
+  case 3:
+    printf("\nDescrição: ");
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+    fgets(ll->l[numlembrete].descricao, sizeof(ll->l[numlembrete].descricao),
+          stdin);
+    ll->l[numlembrete].descricao[strcspn(ll->l[numlembrete].descricao, "\n")] =
+        '\0';
+    printf("\nDescrição alterada\n");
+    break;
+  case 4:
+    printf("\nEstado: ");
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+    fgets(ll->l[numlembrete].estado, sizeof(ll->l[numlembrete].estado), stdin);
+    ll->l[numlembrete].estado[strcspn(ll->l[numlembrete].estado, "\n")] = '\0';
+    printf("\nEstado alterado\n");
+    break;
+  default:
+    printf("\nOpção inválida\n");
+    break;
+  }
+  return 0;
+}
+void printMenualteracao() {
+  printf("\n==== Alteração ====\n1. Prioridade\n2. Categoria\n3. "
+         "Descrição\n4. Estado\n===================\n");
+}
+
 void printMenu() {
   printf(
       "\n======= Menu =======\n1. Criar Lembrete\n2. Deletar Lembrete\n3. "
