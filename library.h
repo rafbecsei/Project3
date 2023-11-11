@@ -19,11 +19,9 @@ int deletarLembrete(ListaDeLembretes *ll);
 int listarLembrete(ListaDeLembretes ll);
 
 void printMenualteracao();
+void printMenufiltros();
 int alterarLembrete(ListaDeLembretes *ll);
-int filtroprioridadeLembrete(ListaDeLembretes *ll);
-// int filtroestadoLembrete(ListaDeLembretes *ll);
-// int filtrocategoriaLembrete(ListaDeLembretes ll);
-// int filtroprioridadeecategoriaLembrete(ListaDeLembretes *ll);
+int filtrosdeLembretes(ListaDeLembretes *ll);
 // int exportarprioridadeLembrete(ListaDeLembretes *ll);
 // int exportarcategoriaLembrete(ListaDeLembretes *ll);
 // int exportarprioridadeecategoriaLembrete(ListaDeLembretes *ll);

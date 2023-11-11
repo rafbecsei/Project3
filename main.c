@@ -28,24 +28,15 @@ int main() {
       alterarLembrete(&ll);
       break;
     case 5:
-      filtroprioridadeLembrete(&ll);
+      filtrosdeLembretes(&ll);
       break;
     case 6:
-      // filtroestadoLembrete(&ll);
-      break;
-    case 7:
-      // filtrocategoriaLembrete(ll);
-      break;
-    case 8:
-      // filtroprioridadeecategoriaLembrete(&ll);
-      break;
-    case 9:
       // exportarprioridadeLembrete(&ll);
       break;
-    case 10:
+    case 7:
       // exportarcategoriaLembrete(&ll);
       break;
-    case 11:
+    case 8:
       // exportarprioridadeecategoriaLembrete(&ll);
     case 0:
       break;
