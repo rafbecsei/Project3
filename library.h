@@ -20,7 +20,7 @@ int listarLembrete(ListaDeLembretes ll);
 
 void printMenualteracao();
 int alterarLembrete(ListaDeLembretes *ll);
-// int filtroprioridadeLembrete(ListaDeLembretes *ll);
+int filtroprioridadeLembrete(ListaDeLembretes *ll);
 // int filtroestadoLembrete(ListaDeLembretes *ll);
 // int filtrocategoriaLembrete(ListaDeLembretes ll);
 // int filtroprioridadeecategoriaLembrete(ListaDeLembretes *ll);

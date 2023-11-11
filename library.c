@@ -7,11 +7,12 @@ int buscaLembrete(ListaDeLembretes ll, int qtd) {
   for (posicao; posicao < ll.qtd; posicao++) {
     if (ll.l[posicao].numero == qtd) {
       return posicao;
-      printf(posicao);
     }
   }
   return -1;
 }
+
+// ------------------------------------------------------------------------------------------------------
 
 int criarLembrete(ListaDeLembretes *ll) {
   printf("\n-Opção Novo Lembrete\n");
@@ -34,6 +35,8 @@ int criarLembrete(ListaDeLembretes *ll) {
   return 0;
 }
 
+// ------------------------------------------------------------------------------------------------------
+
 int deletarLembrete(ListaDeLembretes *ll) {
   printf("\n-Opção Deletar Lembrete\n");
   if (ll->qtd == 0) {
@@ -55,7 +58,7 @@ int deletarLembrete(ListaDeLembretes *ll) {
   }
   return 0;
 }
-
+// ------------------------------------------------------------------------------------------------------
 int listarLembrete(ListaDeLembretes ll) {
   printf("\n-Lista de Lembretes\n");
   for (int i = 0; i < ll.qtd; i++) {
@@ -65,6 +68,8 @@ int listarLembrete(ListaDeLembretes ll) {
   return 0;
 }
 
+// ------------------------------------------------------------------------------------------------------
+
 int alterarLembrete(ListaDeLembretes *ll) {
   printf("\n-Opção Alterar Lembrete\n");
   if (ll->qtd == 0) {
@@ -72,7 +77,7 @@ int alterarLembrete(ListaDeLembretes *ll) {
     return 0;
   }
   int numerodolembrete;
-  printf("\nNúmero do lembrete: ");
+  printf("\nNumero do lembrete: ");
   scanf("%d", &numerodolembrete);
   int numlembrete = buscaLembrete(*ll, numerodolembrete);
   if (numlembrete == -1) {
@@ -124,6 +129,32 @@ int alterarLembrete(ListaDeLembretes *ll) {
   }
   return 0;
 }
+
+// ------------------------------------------------------------------------------------------------------
+
+int filtroprioridadeLembrete(ListaDeLembretes *ll) {
+  printf("\n-Opção Filtro Prioridade\n");
+  if (ll->qtd == 0) {
+    printf("\nNão existe nenhum lembrete, crie um\n");
+    return 0;
+  }
+  int prioridade;
+  int prioridadeEncontrada = 0;
+  printf("\nPrioridade desejada: ");
+  scanf(" %d", &prioridade);
+  for (int i = 0; i < ll->qtd; i++) {
+    if (ll->l[i].prioridade == prioridade) {
+      printf("\n%d. %s: %s | %s\n", i + 1, ll->l[i].categoria, ll->l[i].descricao, ll->l[i].estado);
+      prioridadeEncontrada = 1;
+    }
+  }
+  if (prioridadeEncontrada == 0) {
+    printf("\nNão existem lembretes com a prioridade desejada\n");
+  }
+  return 0;
+}
+
+
 void printMenualteracao() {
   printf("\n==== Alteração ====\n1. Prioridade\n2. Categoria\n3. "
          "Descrição\n4. Estado\n===================\n");
@@ -132,7 +163,7 @@ void printMenualteracao() {
 void printMenu() {
   printf(
       "\n======= Menu =======\n1. Criar Lembrete\n2. Deletar Lembrete\n3. "
-      "Listar Lembretes\n4. Alterar Lembrete\n0. Sair\n====================\n");
+      "Listar Lembretes\n4. Alterar Lembrete\n5. Filtrar Prioridade\n0. Sair\n====================\n");
 }
 
 int salvarLista(ListaDeLembretes ll, char nome[]) {

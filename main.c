@@ -28,7 +28,7 @@ int main() {
       alterarLembrete(&ll);
       break;
     case 5:
-      // filtroprioridadeLembrete(&ll);
+      filtroprioridadeLembrete(&ll);
       break;
     case 6:
       // filtroestadoLembrete(&ll);
