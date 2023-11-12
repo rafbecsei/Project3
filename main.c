@@ -31,13 +31,8 @@ int main() {
       filtrosdeLembretes(&ll);
       break;
     case 6:
-      // exportarprioridadeLembrete(&ll);
+      exportarLembretes(&ll);
       break;
-    case 7:
-      // exportarcategoriaLembrete(&ll);
-      break;
-    case 8:
-      // exportarprioridadeecategoriaLembrete(&ll);
     case 0:
       break;
     default:

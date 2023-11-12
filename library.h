@@ -18,15 +18,14 @@ int criarLembrete(ListaDeLembretes *ll);
 int deletarLembrete(ListaDeLembretes *ll);
 int listarLembrete(ListaDeLembretes ll);
 
+void printMenu();
 void printMenualteracao();
 void printMenufiltros();
+void printMenuexportar();
 int alterarLembrete(ListaDeLembretes *ll);
 int filtrosdeLembretes(ListaDeLembretes *ll);
-// int exportarprioridadeLembrete(ListaDeLembretes *ll);
-// int exportarcategoriaLembrete(ListaDeLembretes *ll);
-// int exportarprioridadeecategoriaLembrete(ListaDeLembretes *ll);
+int exportarLembretes(ListaDeLembretes *ll);
 
-void printMenu();
 int salvarLista(ListaDeLembretes ll, char nome[]);
 int carregarLista(ListaDeLembretes *ll, char nome[]);
 

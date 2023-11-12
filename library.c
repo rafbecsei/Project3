@@ -143,87 +143,185 @@ int filtrosdeLembretes(ListaDeLembretes *ll) {
   printf("Escolha o Filtro desejado: ");
   scanf("%d", &opcao);
   switch (opcao) {
+  case 1:
+    printf("\n-Opção Filtrar Prioridade\n");
+    int prioridade;
+    int prioridadeEncontrada = 0;
+    printf("\nPrioridade desejada: ");
+    scanf(" %d", &prioridade);
+    for (int i = 0; i < ll->qtd; i++) {
+      if (ll->l[i].prioridade == prioridade) {
+        printf("\n%d. %s: %s | %s\n", i + 1, ll->l[i].categoria,
+               ll->l[i].descricao, ll->l[i].estado);
+        prioridadeEncontrada = 1;
+      }
+    }
+    if (prioridadeEncontrada == 0) {
+      printf("\nNão existem lembretes com a Prioridade desejada\n");
+    }
+    break;
+  case 2:
+    printf("\n-Opção Filtrar Estado\n");
+    char estado[100];
+    int estadoEncontrada = 0;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+    printf("\nEstado desejada: ");
+    fgets(estado, sizeof(estado), stdin);
+    estado[strcspn(estado, "\n")] = '\0';
+    for (int i = 0; i < ll->qtd; i++) {
+      if (strcmp(ll->l[i].estado, estado) == 0) {
+        printf("\n%d. %s: %s (Prioridade: %d)\n", i + 1, ll->l[i].categoria,
+               ll->l[i].descricao, ll->l[i].prioridade);
+        estadoEncontrada = 1;
+      }
+    }
+    if (estadoEncontrada == 0) {
+      printf("\nNão existem lembretes com o Estado desejada\n");
+    }
+    break;
+  case 3:
+    printf("\n-Opção Filtrar Categoria\n");
+    char categoria[100];
+    int categoriaEncontrada = 0;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+    printf("\nCategoria desejada: ");
+    fgets(categoria, sizeof(categoria), stdin);
+    categoria[strcspn(categoria, "\n")] = '\0';
+    for (int i = 0; i < ll->qtd; i++) {
+      if (strcmp(ll->l[i].categoria, categoria) == 0) {
+        printf("\n%d. %s (Prioridade: %d) | %s\n", i + 1, ll->l[i].descricao,
+               ll->l[i].prioridade, ll->l[i].estado);
+        categoriaEncontrada = 1;
+      }
+    }
+    if (categoriaEncontrada == 0) {
+      printf("\nNão existem lembretes com a Categoria desejada\n");
+    }
+    break;
+  case 4:
+    printf("\n-Opção Filtrar Prioridade e Categoria\n");
+    int prioridadedesejada;
+    char categoriadesejada[100];
+    int prioridadedesejadaEncontrada = 0;
+    int categoriadesejadaEncontrada = 0;
+    printf("\nPrioridade desejada: ");
+    scanf(" %d", &prioridadedesejada);
+    printf("\nCategoria desejada: ");
+    while ((c = getchar()) != '\n' && c != EOF) {}
+    fgets(categoriadesejada, sizeof(categoriadesejada), stdin);
+    categoriadesejada[strcspn(categoriadesejada, "\n")] = '\0';
+    for (int i = 0; i < ll->qtd; i++) {
+      if (ll->l[i].prioridade == prioridadedesejada &&
+          strcmp(ll->l[i].categoria, categoriadesejada) == 0) {
+        printf("\n%d. %s | %s\n", i + 1, ll->l[i].descricao, ll->l[i].estado);
+        categoriadesejadaEncontrada = 1;
+        prioridadedesejadaEncontrada = 1;
+      }
+    }
+    if (categoriadesejadaEncontrada == 0 && prioridadedesejadaEncontrada == 0) {
+      printf("\nNão existem lembretes com essa Categoria e/ou Prioridade\n");
+    }
+    break;
+  default:
+    printf("Opção não existe\n");
+    break;
+  }
+}
+
+// ------------------------------------------------------------------------------------------------------
+
+int exportarLembretes(ListaDeLembretes *ll) {
+  if (ll->qtd == 0) {
+    printf("\nNão existe nenhum lembrete, crie um\n");
+    return 0;
+  }
+  printMenuexportar();
+  int opcao;
+  int c;
+  printf("Escolha uma opção: ");
+  scanf("%d", &opcao);
+  switch (opcao) {
     case 1: 
-      printf("\n-Opção Filtrar Prioridade\n");
-      int prioridade;
-      int prioridadeEncontrada = 0;
-      printf("\nPrioridade desejada: ");
-      scanf(" %d", &prioridade);
-      for (int i = 0; i < ll->qtd; i++) {
-        if (ll->l[i].prioridade == prioridade) {
-          printf("\n%d. %s: %s | %s\n", i + 1, ll->l[i].categoria, ll->l[i].descricao, ll->l[i].estado);
-          prioridadeEncontrada = 1;
+      {
+        FILE *f = fopen("exportar.txt", "w");
+        int prioridade;
+        int prioridadeEncontrada = 0;
+        printf("\nPrioridade desejada: ");
+        scanf("%d", &prioridade);
+        for (int i = 0; i < ll->qtd; i++) {
+          if (ll->l[i].prioridade == prioridade) {
+            fprintf(f, "\n(Prioridade: %d) %s: %s | %s\n",
+                    ll->l[i].prioridade, ll->l[i].categoria, ll->l[i].estado,
+                    ll->l[i].descricao);
+            prioridadeEncontrada = 1;
+          }
         }
-      }
-      if (prioridadeEncontrada == 0) {
-        printf("\nNão existem lembretes com a Prioridade desejada\n");
-      }
-      break;
-    case 2:
-      printf("\n-Opção Filtrar Estado\n");
-      char estado[100];
-      int estadoEncontrada = 0;
-      while ((c = getchar()) != '\n' && c != EOF) {}
-      printf("\nEstado desejada: ");
-      fgets(estado, sizeof(estado), stdin);
-      estado[strcspn(estado, "\n")] = '\0';
-      for (int i = 0; i < ll->qtd; i++) {
-        if (strcmp(ll->l[i].estado, estado) == 0) {
-          printf("\n%d. %s: %s (Prioridade: %d)\n", i + 1, ll->l[i].categoria, ll->l[i].descricao, ll->l[i].prioridade);
-          estadoEncontrada = 1;
+        if (prioridadeEncontrada == 0) {
+          printf("\nNão existem lembretes com a Prioridade desejada\n");
         }
+        fclose(f);
+        break;
       }
-      if (estadoEncontrada == 0) {
-        printf("\nNão existem lembretes com o Estado desejada\n");
-      }
-      break;
-    case 3:
-      printf("\n-Opção Filtrar Categoria\n");
-      char categoria[100];
-      int categoriaEncontrada = 0;
-      while ((c = getchar()) != '\n' && c != EOF) {}
-      printf("\nCategoria desejada: ");
-      fgets(categoria, sizeof(categoria), stdin);
-      categoria[strcspn(categoria, "\n")] = '\0';
-      for (int i = 0; i < ll->qtd; i++) {
-        if (strcmp(ll->l[i].categoria, categoria) == 0) {
-          printf("\n%d. %s (Prioridade: %d) | %s\n", i + 1, ll->l[i].descricao, ll->l[i].prioridade, ll->l[i].estado);
-          categoriaEncontrada = 1;
+    case 2: 
+      {
+        FILE *f = fopen("exportar.txt", "w");
+        char categoria[100];
+        int categoriaEncontrada = 0;
+        printf("\nCategoria desejada: ");
+        while ((c = getchar()) != '\n' && c != EOF) {
         }
-      }
-      if (categoriaEncontrada == 0) {
-        printf("\nNão existem lembretes com a Categoria desejada\n");
-      }
-      break;
-    case 4:
-      printf("\n-Opção Filtrar Prioridade e Categoria\n");
-      int prioridadedesejada;
-      char categoriadesejada[100];
-      int prioridadedesejadaEncontrada = 0;
-      int categoriadesejadaEncontrada = 0;
-      printf("\nPrioridade desejada: ");
-      scanf(" %d", &prioridadedesejada);
-      printf("\nCategoria desejada: ");
-      while ((c = getchar()) != '\n' && c != EOF) {}
-      fgets(categoriadesejada, sizeof(categoriadesejada), stdin);
-      categoriadesejada[strcspn(categoriadesejada, "\n")] = '\0';
-      for (int i = 0; i < ll->qtd; i++) {
-        if (ll->l[i].prioridade == prioridadedesejada && strcmp(ll->l[i].categoria, categoriadesejada) == 0) {
-          printf("\n%d. %s | %s\n", i + 1, ll->l[i].descricao, ll->l[i].estado);
-          categoriadesejadaEncontrada = 1;
-          prioridadedesejadaEncontrada = 1;
+        fgets(categoria, sizeof(categoria), stdin);
+        categoria[strcspn(categoria, "\n")] = '\0';
+        for (int i = 0; i < ll->qtd; i++) {
+          if (strcmp(ll->l[i].categoria, categoria) == 0) {
+            fprintf(f, "\n(Prioridade: %d) %s: %s | %s\n",
+                    ll->l[i].prioridade, ll->l[i].categoria, ll->l[i].estado,
+                    ll->l[i].descricao);
+            categoriaEncontrada = 1;
+          }
         }
-      }
-      if (categoriadesejadaEncontrada == 0 && prioridadedesejadaEncontrada == 0) {
-        printf("\nNão existem lembretes com essa Categoria e/ou Prioridade\n");
-      }
+        if (categoriaEncontrada == 0) {
+          printf("\nNão existem lembretes com a Categoria desejada\n");
+        }
+        fclose(f);
+      } 
       break;
-    default:
-      printf("Opção não existe\n");
+    case 3: 
+      {
+        FILE *f = fopen("exportar.txt", "w");
+        int prioridade;
+        char categoria[100];
+        int prioridadeEncontrada = 0;
+        int categoriaEncontrada = 0;
+        printf("\nPrioridade desejada: ");
+        scanf("%d", &prioridade);
+        printf("\nCategoria desejada: ");
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        fgets(categoria, sizeof(categoria), stdin);
+        categoria[strcspn(categoria, "\n")] = '\0';
+        for (int i = 0; i < ll->qtd; i++) {
+          if (ll->l[i].prioridade == prioridade && strcmp(ll->l[i].categoria, categoria) == 0) {
+            fprintf(f, "\n(Prioridade: %d) %s: %s | %s\n", ll->l[i].prioridade, ll->l[i].categoria, ll->l[i].estado, ll->l[i].descricao);
+            prioridadeEncontrada = 1;
+            categoriaEncontrada = 1;
+          }
+        }
+        if (categoriaEncontrada == 0 && prioridadeEncontrada == 0) {
+          printf("\nNão existem lembretes com essa Categoria e/ou Prioridade\n");
+        }
+        fclose(f);
+      }
       break;
   }
 }
 
+void printMenu() {
+  printf("\n======== Menu ========\n1. Criar novo Lembrete\n2. Deletar um "
+         "Lembrete\n3. Listar os Lembretes\n4. Alterar os Lembrete\n5. Filtrar "
+         "Lembretes\n6. Exportar Lembretes\n0. Sair\n======================\n");
+}
 
 void printMenualteracao() {
   printf("\n==== Alteração ====\n1. Prioridade\n2. Categoria\n3. "
@@ -231,13 +329,15 @@ void printMenualteracao() {
 }
 
 void printMenufiltros() {
-  printf("\n============ Filtros ============\n1. Filtrar por Prioridade\n2. Filtrar por Estado\n3. Filtrar por Categotia\n4. Filtrar Prioridade e Categoria\n=================================\n");
+  printf("\n============ Filtros ============\n1. Filtrar por Prioridade\n2. "
+         "Filtrar por Estado\n3. Filtrar por Categotia\n4. Filtrar Prioridade "
+         "e Categoria\n=================================\n");
 }
 
-void printMenu() {
-  printf(
-      "\n======== Menu ========\n1. Criar novo Lembrete\n2. Deletar um Lembrete\n3. "
-      "Listar os Lembretes\n4. Alterar os Lembrete\n5. Filtrar Lembretes\n0. Sair\n======================\n");
+void printMenuexportar() {
+  printf("\n============ Exportar ============\n1. Exportar por Prioridade\n2. "
+         "Exportar por Categoria\n3. Exportar Prioridade e "
+         "Categoria\n==================================\n");
 }
 
 int salvarLista(ListaDeLembretes ll, char nome[]) {
