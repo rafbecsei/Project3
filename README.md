@@ -1,4 +1,4 @@
-# Projeto 3
+# Gerenciado de Tarefas em C
 
 Desenvolvimento de um programa de gerenciamento de tarefas, capaz de armazenar até 100 lembretes. Cada lembrete é caracterizada por uma descrição, uma categoria e uma prioridade, onde valores mais altos indicam maior prioridade. O usuário pode cadastrar, deletar e listar os lembretes, além de realizar as seguintes operações: 
 
